@@ -1,0 +1,17 @@
+body {
+    width: 100%;
+    margin: 0px;
+}
+
+#productImages {
+    width: 800px;
+    height: 500px;
+    margin-left: auto;
+    margin-right: auto;
+    border-style: solid;
+}
+#productImages img {
+    display: block;
+    float: left;
+    width: 33%;
+}
