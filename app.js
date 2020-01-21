@@ -2,6 +2,7 @@
 
 
 // var numProductsTotal = 20;
+var productImages = document.getElementById('productImages');
 var productA = document.getElementById('productA');
 var productB = document.getElementById('productB');
 var productC = document.getElementById('productC');
@@ -13,6 +14,7 @@ var productCIndex = null;
 var productChoiceCount = 0;
 var choicesTotal = 5;
 
+
 function Product(name, image){
     this.name = name;
     this.image = image;
@@ -21,11 +23,13 @@ function Product(name, image){
     Product.allProducts.push(this);
 }
 
+
 function randomProduct() {
     // inclusive of 0, exclusive of array length
     var randomInt = Math.floor(Math.random()*Product.allProducts.length);
     return randomInt;
 }
+
 
 function renderProducts() {
     var sameProducts = false;
@@ -52,7 +56,40 @@ function renderProducts() {
     Product.allProducts[productAIndex].views ++;
     Product.allProducts[productBIndex].views ++;
     Product.allProducts[productCIndex].views ++;
+    console.log(`${Product.allProducts[productAIndex].name}, ${Product.allProducts[productBIndex].name}, and ${Product.allProducts[productCIndex].name} shown.`);
 }
+
+
+var handleClickOnProduct = function(event){
+    var productClicked = event.target.id;
+    var validClick = false;
+    switch(productClicked) {
+        case 'productA':
+            validClick = true;
+            productChoiceCount ++;
+            Product.allProducts[productAIndex].clicks ++;
+            console.log(`${Product.allProducts[productAIndex].name} selected, and has been chosen  ${Product.allProducts[productAIndex].clicks}/${Product.allProducts[productAIndex].views} times.`);
+            break;
+        case 'productB':
+            validClick = true;
+            productChoiceCount ++;
+            Product.allProducts[productBIndex].clicks ++;
+            console.log(`${Product.allProducts[productBIndex].name} selected, and has been chosen  ${Product.allProducts[productBIndex].clicks}/${Product.allProducts[productBIndex].views} times.`);
+            break;
+        case 'productC':
+            validClick = true;
+            productChoiceCount ++;
+            Product.allProducts[productCIndex].clicks ++;
+            console.log(`${Product.allProducts[productCIndex].name} selected, and has been chosen  ${Product.allProducts[productCIndex].clicks}/${Product.allProducts[productCIndex].views} times.`);
+            break;
+        default:
+    }
+    if (validClick) {
+        renderProducts();
+    }
+}
+
+
 
 Product.allProducts = [];
 // Create all products
@@ -77,7 +114,6 @@ new Product('Tentacle USB Drive', '/img/usb.gif');
 new Product('Twisted Watering Can', '/img/water-can.jpg');
 new Product('Twisted Wine Glass', '/img/wine-glass.jpg');
 
-renderProducts();
 
 // // Dynamically add products
 // function genProducts(){
@@ -87,3 +123,8 @@ renderProducts();
 //         newProduct = new Product(filenames[i], imagepaths[i]);
 //     }
 // }
+
+renderProducts();
+
+// Event listener
+productImages.addEventListener('click', handleClickOnProduct)
