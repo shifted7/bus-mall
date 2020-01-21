@@ -6,13 +6,14 @@ var productImages = document.getElementById('productImages');
 var productA = document.getElementById('productA');
 var productB = document.getElementById('productB');
 var productC = document.getElementById('productC');
+var reportList = document.getElementById('reportList');
 
 var productAIndex = null;
 var productBIndex = null;
 var productCIndex = null;
 
 var productChoiceCount = 0;
-var choicesTotal = 5;
+var choicesTotal = 25;
 
 
 function Product(name, image){
@@ -56,7 +57,6 @@ function renderProducts() {
     Product.allProducts[productAIndex].views ++;
     Product.allProducts[productBIndex].views ++;
     Product.allProducts[productCIndex].views ++;
-    console.log(`${Product.allProducts[productAIndex].name}, ${Product.allProducts[productBIndex].name}, and ${Product.allProducts[productCIndex].name} shown.`);
 }
 
 
@@ -68,27 +68,42 @@ var handleClickOnProduct = function(event){
             validClick = true;
             productChoiceCount ++;
             Product.allProducts[productAIndex].clicks ++;
-            console.log(`${Product.allProducts[productAIndex].name} selected, and has been chosen  ${Product.allProducts[productAIndex].clicks}/${Product.allProducts[productAIndex].views} times.`);
             break;
         case 'productB':
             validClick = true;
             productChoiceCount ++;
             Product.allProducts[productBIndex].clicks ++;
-            console.log(`${Product.allProducts[productBIndex].name} selected, and has been chosen  ${Product.allProducts[productBIndex].clicks}/${Product.allProducts[productBIndex].views} times.`);
             break;
         case 'productC':
             validClick = true;
             productChoiceCount ++;
             Product.allProducts[productCIndex].clicks ++;
-            console.log(`${Product.allProducts[productCIndex].name} selected, and has been chosen  ${Product.allProducts[productCIndex].clicks}/${Product.allProducts[productCIndex].views} times.`);
             break;
         default:
     }
     if (validClick) {
-        renderProducts();
+        if (productChoiceCount >= choicesTotal) {
+            productImages.removeEventListener('click', handleClickOnProduct)
+            reportProductResults(reportList);
+        } else {
+            renderProducts();
+        }
     }
 }
 
+function reportProductResults(parentElement) {
+    var name = '';
+    var clicks = 0;
+    var views = 0;
+    for (var i=0;i < Product.allProducts.length; i++){
+        var productLI = document.createElement('li');
+        name = Product.allProducts[i].name;
+        clicks = Product.allProducts[i].clicks;
+        views = Product.allProducts[i].views;
+        productLI.textContent = `${name} was chosen ${clicks} times out of ${views} times it was shown.`
+        parentElement.appendChild(productLI);
+    }
+}
 
 
 Product.allProducts = [];
