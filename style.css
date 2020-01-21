@@ -1,0 +1,30 @@
+body {
+    width: 100%;
+    margin: 0px;
+}
+
+#productImages {
+    width: 960px;
+    height: 200px;
+    margin-left: auto;
+    margin-right: auto;
+    border-style: solid;
+    
+}
+#productImages img {
+    display: block;
+    float: left;
+    height: 100%;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+#reportList {
+    width: 800px;
+    font-family: 'Courier New', Courier, monospace;
+    text-align: right;
+    list-style-type: none;
+    margin-left: auto;
+    margin-right: auto;
+
+}
