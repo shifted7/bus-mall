@@ -20,6 +20,11 @@ body {
 }
 
 #reportList {
+    width: 800px;
     font-family: 'Courier New', Courier, monospace;
     text-align: right;
+    list-style-type: none;
+    margin-left: auto;
+    margin-right: auto;
+
 }
