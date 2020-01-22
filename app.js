@@ -15,6 +15,7 @@ var productAIndex = null;
 var productBIndex = null;
 var productCIndex = null;
 
+var context = document.getElementById('myCanvas').getContext('2d');
 var reportList = document.getElementById('reportList');
 
 var productChoiceCount = 0;
@@ -131,11 +132,51 @@ var handleClickOnProduct = function(event){
     if (validClick) {
         if (productChoiceCount >= choicesTotal) {
             productsSection.removeEventListener('click', handleClickOnProduct)
+            createChart();
             reportProductResults(reportList);
         } else {
             renderProducts();
         }
     }
+}
+
+function createChart(){
+    var productNameLabels = getProductNames();
+    var productClickData = getProductClicks();
+    var productViewData = getProductViews();
+    console.log(productNameLabels);
+    console.log(productClickData);
+    console.log(productViewData);
+    // var chart = new Chart(context, {
+    //     type: 'bar',
+    //     data: {
+    //         labels:
+    //     }
+    // })
+}
+
+function getProductNames(){
+    var names = [];
+    for (var i = 0; i < Product.allProducts.length; i++){
+        names.push(Product.allProducts[i].name);
+    }
+    return names;
+}    
+
+function getProductClicks(){
+    var clicks = [];
+    for (var i = 0; i < Product.allProducts.length; i++){
+        clicks.push(Product.allProducts[i].clicks);
+    }
+    return clicks;
+}
+
+function getProductViews(){
+    var views = [];
+    for (var i = 0; i < Product.allProducts.length; i++){
+        views.push(Product.allProducts[i].views);
+    }
+    return views;
 }
 
 function reportProductResults(parentElement) {
