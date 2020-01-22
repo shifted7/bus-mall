@@ -144,15 +144,21 @@ function createChart(){
     var productNameLabels = getProductNames();
     var productClickData = getProductClicks();
     var productViewData = getProductViews();
-    console.log(productNameLabels);
-    console.log(productClickData);
-    console.log(productViewData);
-    // var chart = new Chart(context, {
-    //     type: 'bar',
-    //     data: {
-    //         labels:
-    //     }
-    // })
+    var chart = new Chart(context, {
+        type: 'bar',
+        data: {
+            labels: productNameLabels,
+            datasets: [{
+                label: '# of Clicks',
+                data: productClickData,
+                backgroundColor: 'red'
+            }, {
+                label: '# of Views',
+                data: productViewData,
+                backgroundColor: 'blue'
+            }]
+        }
+    })
 }
 
 function getProductNames(){
