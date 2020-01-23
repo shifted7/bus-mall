@@ -1,12 +1,10 @@
 'use strict'
 
 
-// var numProductsTotal = 20;
 var productsSection = document.getElementById('productImages');
-var productsShown = [];
 var productsHistory = [];
-var numProductsShown = 3;
 var roundsNoRepeats = 2;
+
 var productAElement = document.getElementById('productA');
 var productBElement = document.getElementById('productB');
 var productCElement = document.getElementById('productC');
@@ -90,6 +88,23 @@ function checkProductHistory(name) {
     return result;
 }
 
+function updateStoredProductData(){
+    var allProductsString = JSON.stringify(Product.allProducts);
+    localStorage.setItem('productData',allProductsString);
+}
+
+function getStoredProductData(){
+    var dataString = localStorage.getItem('productData');
+    if (dataString) {
+        var data = JSON.parse(dataString);
+        for (var objectIndex = 0; objectIndex < data.length; objectIndex++) {
+            Product.allProducts[objectIndex].clicks += data[objectIndex].clicks;
+            Product.allProducts[objectIndex].views += data[objectIndex].views;
+        }
+    }
+    renderProducts();
+}
+
 function renderProducts() {
     var newProductIndexes = generateNewProductIndexes();
     productAIndex = newProductIndexes[0];
@@ -137,6 +152,7 @@ var handleClickOnProduct = function(event){
         } else {
             renderProducts();
         }
+        updateStoredProductData();
     }
 }
 
@@ -223,8 +239,7 @@ new Product('Tentacle USB Drive', '/img/usb.gif');
 new Product('Twisted Watering Can', '/img/water-can.jpg');
 new Product('Twisted Wine Glass', '/img/wine-glass.jpg');
 
-
-renderProducts();
+getStoredProductData();
 
 // Event listener
 productsSection.addEventListener('click', handleClickOnProduct)
