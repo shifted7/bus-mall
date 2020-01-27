@@ -7,27 +7,38 @@
     </head>
     <body>
         <header>
-            <h1>BusMall</h1>
+            <h1>Bus<br>Mall</h1>
             <h2>Product Research</h2>
         </header>
         <main>
-            <h3>Choose your favorite of the three products shown:</h3>
-            <section id="productImages">
-                <div id="productABox">
-                    <img id="productA" src="">
-                </div>
-                <div id="productBBox">
-                    <img id="productB" src="">
-                </div>
-                <div id="productCBox">
-                    <img id="productC" src="">
-                </div>
+            <section id="productChoices">
+                <h3>Choose your favorite of the three products shown:</h3>
+                <section id="productImages">
+                    <div id="productABox">
+                        <img id="productA" src="">
+                    </div>
+                    <div id="productBBox">
+                        <img id="productB" src="">
+                    </div>
+                    <div id="productCBox">
+                        <img id="productC" src="">
+                    </div>
+                </section>
             </section>
-            <p>Your input is valuable. We will use your responses to determine our future catalog!</p>
-            <p>Your results will be shown after 25 selections. Refresh the page to continue responding.</p>
-            <canvas id="myCanvas" width="800px" height="300px"></canvas>
             <section id="reports">
+                <canvas id="myCanvas" width="800px" height="300px"></canvas>
                 <ul id="reportList"></ul>
+            </section>
+            <section id="FAQ">
+                <h4>FAQ</h4>
+                <h5>What is the purpose of our selections?</h5>
+                <p>Your input is valuable. We will use your responses to determine our future catalog!</p>
+                <h5>My decision is based on price, and I don't see any prices for these products.</h5>
+                <p>Prices are not shown for these fictional products. If needed, you can assume the prices for all items is the same.</p>
+                <h5>I have made a number of selections but I was suddenly unable to make more. What's going on?</h5>
+                <p>Your results will be shown after 25 selections. Refresh the page to continue responding.</p>
+                <h5>Are these products real? Can I purchase them for my use?</h5>
+                <p>These products are not real, but your responses will help inform us about which products to focus on for our first real catalog!</p>
             </section>
         </main>
         <script type="text/javascript" src="app.js"></script>

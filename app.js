@@ -171,7 +171,9 @@ function createChart(){
             }, {
                 label: '# of Views',
                 data: productViewData,
-                backgroundColor: 'blue'
+                backgroundColor: 'white',
+                borderColor: 'black',
+                borderWidth: 1
             }]
         }
     })
