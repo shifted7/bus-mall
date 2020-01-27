@@ -92,3 +92,14 @@ h3 {
 #FAQ p {
     text-indent: 20px;
 }
+
+footer {
+    height: 100px;
+    text-align: center;
+}
+
+footer p {
+    font-size: 12px;
+    line-height: 100px;
+    color: #f1f1f1;
+}
