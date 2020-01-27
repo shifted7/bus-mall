@@ -1,6 +1,6 @@
 'use strict'
 
-
+// Initializes variables for html elements, history data, and parameters for number of total choices and rounds without repeating a product
 var productsSection = document.getElementById('productImages');
 var productsHistory = [];
 var roundsNoRepeats = 2;
@@ -19,7 +19,7 @@ var reportList = document.getElementById('reportList');
 var productChoiceCount = 0;
 var choicesTotal = 25;
 
-
+// Constructor function for new products
 function Product(name, image){
     this.name = name;
     this.image = image;
@@ -28,6 +28,7 @@ function Product(name, image){
     Product.allProducts.push(this);
 }
 
+// Randomly selects three non-matching products that have not appeared in the history index within a certain number of rounds
 function generateNewProductIndexes() {
     var sameProducts = false;
     var newProductAIndex = null;
@@ -88,11 +89,13 @@ function checkProductHistory(name) {
     return result;
 }
 
+// Write to localStorage
 function updateStoredProductData(){
     var allProductsString = JSON.stringify(Product.allProducts);
     localStorage.setItem('productData',allProductsString);
 }
 
+// Read from localStorage
 function getStoredProductData(){
     var dataString = localStorage.getItem('productData');
     if (dataString) {
@@ -105,6 +108,7 @@ function getStoredProductData(){
     renderProducts();
 }
 
+// Show images for new products, add new products to history, and register that the new products have been viewed
 function renderProducts() {
     var newProductIndexes = generateNewProductIndexes();
     productAIndex = newProductIndexes[0];
@@ -126,6 +130,8 @@ function renderProducts() {
 var handleClickOnProduct = function(event){
     var productClickedID = event.target.id;
     var validClick = false;
+    
+    // Check the location of the click within the form
     switch(productClickedID) {
         case 'productA':
             validClick = true;
@@ -144,7 +150,10 @@ var handleClickOnProduct = function(event){
             break;
         default:
     }
+    
+    
     if (validClick) {
+        // Check if maximum number of choices has been reached, and report results if so
         if (productChoiceCount >= choicesTotal) {
             productsSection.removeEventListener('click', handleClickOnProduct)
             createChart();
@@ -171,7 +180,9 @@ function createChart(){
             }, {
                 label: '# of Views',
                 data: productViewData,
-                backgroundColor: 'blue'
+                backgroundColor: 'white',
+                borderColor: 'black',
+                borderWidth: 1
             }]
         }
     })
@@ -217,7 +228,7 @@ function reportProductResults(parentElement) {
 
 
 Product.allProducts = [];
-// Create all products
+// Initialize all products
 new Product('Star Wars Luggage Bag', '/img/bag.jpg');
 new Product('Banana Slicer', '/img/banana.jpg');
 new Product('Open-toe Rainboots', '/img/boots.jpg');
